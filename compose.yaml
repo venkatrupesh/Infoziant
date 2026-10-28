@@ -91,11 +91,12 @@ services:
     image: mongo:7.0
     container_name: vehiclevault-mongodb
     restart: unless-stopped
-    # MongoDB is reachable only from this Compose network and host loopback
+    # MongoDB is reachable only from this Compose network (no host port mapping needed)
     expose:
       - "27017"
-    ports:
-      - "127.0.0.1:27017:27017"
+    # Commented out to avoid port conflicts with other MongoDB containers
+    # ports:
+    #   - "127.0.0.1:27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
